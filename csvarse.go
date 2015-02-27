@@ -10,9 +10,6 @@ import (
 )
 
 var csvHeader = flag.Bool("h", true, "First line is header")
-
-//var sqlCreate = flag.Bool("sql", false, "Output as SQL create query")
-//var sqlTableName = flag.String("t", "ad_users", "Specify default SQL table name")
 var ogIndexOverride = flag.Int("o", -1, "Specify the objectGUID index")
 
 func main() {
@@ -52,10 +49,6 @@ func main() {
 	out.Write(headerRow)
 	out.Flush()
 
-	//	if *sqlCreate && {
-	//		sqlCreateHeader()
-	//	}
-
 	var dataRow []string
 	for {
 		dataRow, err = readLine(r)
@@ -63,18 +56,9 @@ func main() {
 			return
 		}
 		dataRow[ogIndex] = getHex(dataRow[ogIndex])
-		//		if *sqlCreate {
-		//			sqlCreateValue(dataRow)
-		//		} else {
-		//			fmt.Printf("%v\n", dataRow)
-		//fmt.Printf("%v\n", dataRow)
 		out.Write(dataRow)
 		out.Flush()
 	}
-
-	//	if *sqlCreate {
-	//		sqlCreateFooter()
-	//	}
 
 }
 
@@ -99,12 +83,3 @@ func findFirst(s string, slice []string) int {
 func getHex(s string) string {
 	return strings.TrimSuffix(strings.TrimPrefix(strings.TrimSpace(s), "X'"), "'")
 }
-
-//func sqlCreateHeader() {
-//	fmt.Println("SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";")
-//	fmt.Printf("CREATE TABLE IF NOT EXISTS `%v` (\n", sqlTableName)
-//	fmt.Printf("`DN` ...") // To be completed one day ...
-//}
-//func sqlCreateValue(s string) {
-//}
-//func sqlCreateFooter() {}
