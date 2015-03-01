@@ -1,3 +1,4 @@
+// Process a CSV from Microsoft's csvde and fix the objectGUID field's format
 package main
 
 import (
@@ -36,7 +37,7 @@ func main() {
 	if *csvHeader {
 		headerRow, err = readLine(r)
 		if err != nil {
-			log.Fatal(err)
+			return
 		}
 		ogIndex = findFirst("objectGUID", headerRow)
 	}
